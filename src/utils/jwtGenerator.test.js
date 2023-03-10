@@ -1,7 +1,9 @@
 const { generateJwtToken } = require('./jwtGenerator');
+
 const jwt = require('jsonwebtoken');
 
 describe('generateJwtToken', () => {
+
   test('returns a valid JWT token', () => {
     const user = { id: 123, username: 'testuser' };
     const token = generateJwtToken(user);

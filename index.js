@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const userRoutes = require('./src/routes/userRoutes');
-// const { redisClient } = require('./src/utils/redis');
+
 app.use(express.json());
 app.use('/', userRoutes);
 

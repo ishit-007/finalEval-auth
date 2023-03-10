@@ -11,6 +11,7 @@ const createCredentialsHandler = async (req, res) => {
     res.status(401).send(err.message);
   }
 };
+
 const loginHandler = async (req, res) => {
   console.log('Login Handler');
   const userName = req.body.userName;
@@ -29,6 +30,7 @@ const tokenValidationHandler = async (req, res) => {
   const tokenValidationResp = await userServices.tokenValidationService(token);
   res.send(tokenValidationResp);
 };
+
 module.exports = {
   createCredentialsHandler,
   loginHandler,

@@ -5,7 +5,6 @@ const jwtGenerator = require('../utils/jwtGenerator');
 const jwtValidator = require('../utils/jwtValidator');
 const redis = require('../utils/redis');
 
-
 const createCredentialsService = async (userName, password) => {
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
@@ -14,6 +13,7 @@ const createCredentialsService = async (userName, password) => {
       userName: userName,
     }
   });
+
   if (userExists) {
     throw new Error('User Already Exists');
   }
@@ -23,9 +23,11 @@ const createCredentialsService = async (userName, password) => {
       userName: userName,
       password: encryptedPassword,
     });
+
     return user;
   }
 };
+
 const loginService = async (userName, password) => {
   console.log('Login Service');
   const user = await db.userauth.findOne({
@@ -44,12 +46,13 @@ const loginService = async (userName, password) => {
       userName: user.dataValues.userName,
       time: new Date(),
     };
-    const token = await jwtGenerator.generateJwtToken(userData);
-    // console.log('Token: ', token);
+
+    const token = jwtGenerator.generateJwtToken(userData);
     const redisClient = await redis.connectRedis();
     redisClient.set(String(token), '1');
     return token;
-  } else {
+  }
+  else {
     throw new Error('Incorrect Password');
   }
 };
@@ -65,6 +68,7 @@ const tokenValidationService = async (token) => {
     return null;
   }
 };
+
 module.exports = {
   createCredentialsService,
   loginService,

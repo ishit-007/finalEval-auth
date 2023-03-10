@@ -1,6 +1,6 @@
+const { createCredentialsService, loginService, tokenValidationService } = require('./userServices');
 const bcrypt = require('bcryptjs');
 const db = require('../../database/models');
-const { createCredentialsService, loginService, tokenValidationService } = require('./userServices');
 const jwtGenerator = require('../utils/jwtGenerator');
 const redis = require('../utils/redis');
 const jwtValidator = require('../utils/jwtValidator');

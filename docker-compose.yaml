@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6380:6379"
+
+  auth-service:
+    build: .
+    depends_on:
+      - redis
+    ports:
+      - "3000:3000"
+    environment:
+      JWT_SECRET_KEY: "ishit_private_key;"
+      jwt_expiration: 60 * 10;
+      jwt_refresh_expiration: 60 * 60 * 24 * 30;
+      REDIS_HOST: 'docker.for.mac.localhost'

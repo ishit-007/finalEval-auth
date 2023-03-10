@@ -19,8 +19,8 @@ describe('createCredentialsHandler', () => {
       id: 1,
       userName: 'testUser'
     };
-    userServices.createCredentialsService.mockResolvedValue(expectedResponse);
 
+    userServices.createCredentialsService.mockResolvedValue(expectedResponse);
     await createCredentialsHandler(req, res);
 
     expect(userServices.createCredentialsService).toHaveBeenCalledWith('testUser', 'testPassword');
@@ -39,8 +39,8 @@ describe('createCredentialsHandler', () => {
       send: jest.fn(),
       status: jest.fn().mockReturnThis()
     };
-    userServices.createCredentialsService.mockRejectedValue(new Error('Unauthorized'));
 
+    userServices.createCredentialsService.mockRejectedValue(new Error('Unauthorized'));
     await createCredentialsHandler(req, res);
 
     expect(userServices.createCredentialsService).toHaveBeenCalledWith('testUser', 'testPassword');
@@ -57,7 +57,6 @@ describe('loginHandler', () => {
     const res = { send: jest.fn() };
 
     await loginHandler(req, res);
-
     expect(userServices.loginService).toHaveBeenCalledWith(req.body.userName, req.body.password);
     expect(res.send).toHaveBeenCalledWith(token);
   });
